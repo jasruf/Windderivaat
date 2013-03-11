@@ -46,19 +46,18 @@ public class ChartTest extends JFrame {
         // This will create the dataset 
         CategoryDataset dataset = createCategoryDataset();
         
-        // based on the dataset we create the chart
-        JFreeChart chart = ChartFactory.createLineChart("", "", "", dataset, PlotOrientation.VERTICAL, false, false, false);
-        // we put the chart into a panel
         
-        ChartPanel chartPanel = new ChartPanel(chart);
+        ChartViewer chartPanel = new ChartViewer(createAvgDataset(), createHistogramDataset(),
+                dataset, dataset, dataset, dataset);
         
-        chartPanel.setBounds(0, 0, 600, 270);
+        chartPanel.setBounds(0, 0, 800, 1300);
 
         // add it to our application
         jLayer.add(chartPanel);
         setContentPane(jLayer);
         
-        setPreferredSize(new java.awt.Dimension(600, 400));
+        setExtendedState(MAXIMIZED_BOTH);
+        setPreferredSize(new java.awt.Dimension(600, 500));
     }
     /**
      * @param args the command line arguments
