@@ -46,6 +46,7 @@ public class parseData {
         FileInputStream fis = new FileInputStream(file);
         DataInputStream dis = new DataInputStream(fis);
         BufferedReader br = new BufferedReader(new InputStreamReader(dis));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH");
         if (!file.exists()) {
             System.out.println("I can't find the file: " + fileName);
         }
@@ -55,11 +56,14 @@ public class parseData {
         }
         while (((data = br.readLine()) != null)) {
             date = new GregorianCalendar(Integer.parseInt(data.substring(0, 4)), (Integer.parseInt(data.substring(4, 6)) - 1), Integer.parseInt(data.substring(6, 8)), Integer.parseInt(data.substring(9, 11)), 0);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH");
+           
             dateArray.add(date);
             windSpeedArray.add(Integer.parseInt(data.substring(20, 23).replaceAll("\\s", "")));
-            System.out.println(dateFormat.format((dateArray.get(dateArray.size()-1)).getTime())+ " " + windSpeedArray.get(windSpeedArray.size()-1));
+            //System.out.println(dateFormat.format((dateArray.get(dateArray.size()-1)).getTime())+ " " + windSpeedArray.get(windSpeedArray.size()-1));
             //System.out.println(dateFormat.format(date.getTime()));
+        }
+        for (int i = 0; i < windSpeedArray.size(); i++) {
+            System.out.println(  dateFormat.format(dateArray.get(i).getTime())  + " " + windSpeedArray.get(i));
         }
         br.close();
         dis.close();
