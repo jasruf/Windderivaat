@@ -11,7 +11,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -19,16 +22,12 @@ import java.util.Date;
  */
 public class parseData {
      public static void getData() throws FileNotFoundException, IOException {
-            final int skipLines = 22;
+        final int skipLines = 22;
         final int skipCommas = 4;
-        final int skipDate = 11;
-        int countLine = 0;
         int countComma = 0;
-        int countDate = 0;
-        String date;
-        String data = "";
+        String data = null;
         String fileName = "/Users/Tony/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt";
-        Date dateTime = new Date();
+        Calendar date;
         File file = new File(fileName);
         FileInputStream fis = new FileInputStream(file);
         DataInputStream dis = new DataInputStream(fis);
@@ -38,15 +37,19 @@ public class parseData {
         }
 
         for (int i = 0; i < skipLines; i++) {
-        br.readLine();
+            br.readLine();
         }
-              
         while (((data = br.readLine()) != null)) {
-            
-            
+            date = new GregorianCalendar(Integer.parseInt(data.substring(0, 4)), (Integer.parseInt(data.substring(4, 6)) - 1), Integer.parseInt(data.substring(6, 8)), Integer.parseInt(data.substring(9, 11)), 0);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH");
+            //System.out.println(dateFormat.format(date.getTime()));
+
+
         }
-        
+
         dis.close();
+        
+        
         
         
 //        int i;
