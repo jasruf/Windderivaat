@@ -23,9 +23,7 @@ import java.util.logging.Logger;
  *
  * @author Tony
  */
-public class Data {
-
-    
+public class Data {    
     // This main was added for testing only
 //    public static void main(String[] args) { 
 //        Data data = new Data("/Users/Tony/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");//In the arguments give the path of the data documents 
@@ -37,6 +35,7 @@ public class Data {
 //            Logger.getLogger(Data.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
+    
     private final int skipLines;// How many line to skip 
     private List<Calendar> dateArray = new ArrayList<Calendar>();// ArrayList for the date 
     private List<Integer> windSpeedArray = new ArrayList<Integer>();//ArrayList for the wind speed 
@@ -78,7 +77,7 @@ public class Data {
         Calendar date;
         if (!file.exists()) {// Error prompt that the file is not found 
             System.out.println("I can't find the file: " + fileName);
-        }
+        }else{
 
         for (int i = 0; i < skipLines; i++) {
             br.readLine();// Skip the lines that we don't need "lines with no data"
@@ -94,8 +93,10 @@ public class Data {
 //        for (int i = 0; i < windSpeedArray.size(); i++) {// print after the list has been tottaly filled 
 //            System.out.println(dateFormat.format(dateArray.get(i).getTime()) + " " + windSpeedArray.get(i));
 //        }
+        }
         br.close();
         dis.close();
         fis.close();
     }
+        
 }
