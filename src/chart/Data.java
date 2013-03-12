@@ -78,7 +78,7 @@ public class Data {
         Calendar date;
         if (!file.exists()) {// Error prompt that the file is not found 
             System.out.println("I can't find the file: " + fileName);
-        }
+        }else{
 
         for (int i = 0; i < skipLines; i++) {
             br.readLine();// Skip the lines that we don't need "lines with no data"
@@ -94,8 +94,10 @@ public class Data {
 //        for (int i = 0; i < windSpeedArray.size(); i++) {// print after the list has been tottaly filled 
 //            System.out.println(dateFormat.format(dateArray.get(i).getTime()) + " " + windSpeedArray.get(i));
 //        }
+        }
         br.close();
         dis.close();
         fis.close();
     }
+        
 }
