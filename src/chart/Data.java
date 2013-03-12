@@ -45,6 +45,7 @@ public class Data {
     private FileInputStream fis;
     private DataInputStream dis;
     private BufferedReader br;
+    
     private SimpleDateFormat dateFormat;
     
     
