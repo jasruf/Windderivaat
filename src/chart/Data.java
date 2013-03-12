@@ -23,9 +23,7 @@ import java.util.logging.Logger;
  *
  * @author Tony
  */
-public class Data {
-
-    
+public class Data {    
     // This main was added for testing only
 //    public static void main(String[] args) { 
 //        Data data = new Data("/Users/Tony/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");//In the arguments give the path of the data documents 
@@ -37,6 +35,7 @@ public class Data {
 //            Logger.getLogger(Data.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
+    
     private final int skipLines;// How many line to skip 
     private List<Calendar> dateArray = new ArrayList<Calendar>();// ArrayList for the date 
     private List<Integer> windSpeedArray = new ArrayList<Integer>();//ArrayList for the wind speed 
