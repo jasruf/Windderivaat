@@ -84,8 +84,8 @@ public class Data {
             br.readLine();// Skip the lines that we don't need "lines with no data"
         }
         while (((data = br.readLine()) != null)) {//Whille we can still get data add it to both arraylists "the date and wind speed"
-            //Set the date with date valuetype as a GergorinCalender and add the year, month, day, hour and the minutes are set to 0 "0 because we dont have the minutes and dont need them"
-            date = new GregorianCalendar(Integer.parseInt(data.substring(0, 4)), (Integer.parseInt(data.substring(4, 6)) - 1), Integer.parseInt(data.substring(6, 8)), Integer.parseInt(data.substring(9, 11)), 0);
+            //Set the date with date valuetype as a GergorinCalender and add the year, month, day, hour - 1 and the minutes are set to 0 "0 because we dont have the minutes and dont need them"
+            date = new GregorianCalendar(Integer.parseInt(data.substring(0, 4)), (Integer.parseInt(data.substring(4, 6)) - 1), Integer.parseInt(data.substring(6, 8)), Integer.parseInt(data.substring(9, 11) ) - 1, 0);
             dateArray.add(date);// add the date to the ArrayList and replace 
             windSpeedArray.add(Integer.parseInt(data.substring(20, 23).replaceAll("\\s", "")));//Add the wind speed to the ArrayList and replaces any spaces with nothing
             

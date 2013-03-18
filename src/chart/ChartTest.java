@@ -6,8 +6,13 @@ package chart;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
+import math.Formulas;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -58,10 +63,23 @@ public class ChartTest extends JFrame {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        ChartTest demo = new ChartTest("Comparison", "Which operating system are you using?");
-        demo.pack();
-        demo.setVisible(true);
+        
+        Data data = null;
+        try {
+            data = new Data("/Users/Tony/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");
+            data.fill();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Formulas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Formulas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        Formulas obj = new Formulas(data, 1993, 2001);
+        obj.computeAvgDay();
+        obj.computeAvgMonth();
     }
+    
     
     /**
      * Creates a sample dataset 
@@ -119,12 +137,12 @@ public class ChartTest extends JFrame {
     }
     
     private HistogramDataset createHistogramDataset() {
-        double[] dummyVal = { 0.0, 0.5, 0.5 };
+        double[] dummyVal = { 0.0, 0.0, 0.0, 0.3 ,0.5, 0.5, 0.8 };
         
         HistogramDataset histogram = new HistogramDataset();
         
         histogram.setType(HistogramType.RELATIVE_FREQUENCY);
-        histogram.addSeries("H1", dummyVal, 4, 0, 1);
+        histogram.addSeries("H1", dummyVal, 8, 0, 1);
         
         return histogram;
     }
