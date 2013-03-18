@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author JASEEN
  */
-public class Formules {
+public class Formulas {
 
 //    Data data = new Data("/Users/Tony/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");
     Data data;
@@ -23,14 +23,14 @@ public class Formules {
     double avgMonth = 0;
     double avgYear = 0;
 
-    public Formules(String path) {
+    public Formulas(String path) {
         try {
             data = new Data(path);
             data.fill();
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Formules.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Formulas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(Formules.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Formulas.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
