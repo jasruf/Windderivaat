@@ -125,12 +125,12 @@ public class ChartTest extends JFrame {
     }
     
     private HistogramDataset createHistogramDataset() {
-        double[] dummyVal = { 0.0, 0.5, 0.5 };
+        double[] dummyVal = { 0.0, 0.0, 0.0, 0.3 ,0.5, 0.5, 0.8 };
         
         HistogramDataset histogram = new HistogramDataset();
         
         histogram.setType(HistogramType.RELATIVE_FREQUENCY);
-        histogram.addSeries("H1", dummyVal, 4, 0, 1);
+        histogram.addSeries("H1", dummyVal, 8, 0, 1);
         
         return histogram;
     }
