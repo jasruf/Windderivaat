@@ -66,7 +66,8 @@ public class ChartTest extends JFrame {
         
         Data data = null;
         try {
-            data = new Data("/Users/Tony/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");
+            // data = new Data("/Users/Tony/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");
+            data = new Data("D:/Users/Marco/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");
             data.fill();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Formulas.class.getName()).log(Level.SEVERE, null, ex);
@@ -77,7 +78,7 @@ public class ChartTest extends JFrame {
         
         Formulas obj = new Formulas(data, 1993, 2001);
         obj.computeAvgDay();
-        obj.computeAvgMonth();
+        //obj.computeAvgMonth();
     }
     
     
