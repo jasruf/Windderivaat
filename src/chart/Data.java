@@ -23,9 +23,7 @@ import java.util.logging.Logger;
  *
  * @author Tony
  */
-public class Data {
-
-    
+public class Data {    
     // This main was added for testing only
 //    public static void main(String[] args) { 
 //        Data data = new Data("/Users/Tony/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");//In the arguments give the path of the data documents 
@@ -37,6 +35,7 @@ public class Data {
 //            Logger.getLogger(Data.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
+    
     private final int skipLines;// How many line to skip 
     private List<Calendar> dateArray = new ArrayList<Calendar>();// ArrayList for the date 
     private List<Integer> windSpeedArray = new ArrayList<Integer>();//ArrayList for the wind speed 
@@ -46,6 +45,7 @@ public class Data {
     private FileInputStream fis;
     private DataInputStream dis;
     private BufferedReader br;
+    
     private SimpleDateFormat dateFormat;
     
     
@@ -84,8 +84,8 @@ public class Data {
             br.readLine();// Skip the lines that we don't need "lines with no data"
         }
         while (((data = br.readLine()) != null)) {//Whille we can still get data add it to both arraylists "the date and wind speed"
-            //Set the date with date valuetype as a GergorinCalender and add the year, month, day, hour and the minutes are set to 0 "0 because we dont have the minutes and dont need them"
-            date = new GregorianCalendar(Integer.parseInt(data.substring(0, 4)), (Integer.parseInt(data.substring(4, 6)) - 1), Integer.parseInt(data.substring(6, 8)), Integer.parseInt(data.substring(9, 11)), 0);
+            //Set the date with date valuetype as a GergorinCalender and add the year, month, day, hour - 1 and the minutes are set to 0 "0 because we dont have the minutes and dont need them"
+            date = new GregorianCalendar(Integer.parseInt(data.substring(0, 4)), (Integer.parseInt(data.substring(4, 6)) - 1), Integer.parseInt(data.substring(6, 8)), Integer.parseInt(data.substring(9, 11) ) - 1, 0);
             dateArray.add(date);// add the date to the ArrayList and replace 
             windSpeedArray.add(Integer.parseInt(data.substring(20, 23).replaceAll("\\s", "")));//Add the wind speed to the ArrayList and replaces any spaces with nothing
             
