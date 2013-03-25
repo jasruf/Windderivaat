@@ -78,7 +78,8 @@ public class ChartTest extends JFrame {
         
         Formulas obj = new Formulas(data, 1993, 2001);
         obj.computeAvgDay();
-        //obj.computeAvgMonth();
+        obj.computeAvgWeek();
+        obj.computeAvgMonth();
     }
     
     

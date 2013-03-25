@@ -16,13 +16,15 @@ import java.util.logging.Logger;
  */
 public class Formulas {
 
+    final int FEBRUARY = 1;
 //    Data data = new Data("/Users/Tony/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");
     Data data;
     int yearStart, yearEnd;
     double[][] avgDayPerYear;
-    double[] avgWeek;
-    double[] avgMonth;
-    double[] avgYear;
+    private double[] avgWeek;
+    private double[] avgMonth;
+    private double[] avgQuarter;
+    
     int monthDays[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     public Formulas(Data data, int yearStart, int yearEnd) {
@@ -33,7 +35,6 @@ public class Formulas {
     }
 
     public void computeAvgDay() {
-        final int FEBRUARY = 1;
         // Skip to start year
         final int yearFirst = 1991;
 
@@ -49,7 +50,7 @@ public class Formulas {
             }
 
             for (int j = 0; j < 12; j++) {
-                skipHours += monthDays[j]*24;
+                skipHours += monthDays[j] * 24;
             }
         }
 
@@ -82,33 +83,94 @@ public class Formulas {
 
     public void computeAvgWeek() {
         avgWeek = new double[52];
+
+        double totalWeek;
+        int pos = 0;
+        for (int i = 0; i < getAvgWeek().length; i++) {
+            totalWeek = 0;
+
+            // Every year
+            for (int j = 0; j < avgDayPerYear.length; j++) {
+
+                // Every day
+                for (int k = 0; k < 7; k++) {
+                    totalWeek += avgDayPerYear[j][pos + k];
+                }
+            }
+            avgWeek[i] = totalWeek / avgDayPerYear.length / 7;
+
+            pos += 7;
+        }
     }
-/*
+
     public void computeAvgMonth() {
 
         avgMonth = new double[12];
 
-        double totalMonth = 0;
-
-        int day = 0;
-        for (int i = 1; i < 12; i++) {
-            for (int j = day; j < monthDays[i] + day; j++) {
-                totalMonth += avgDay[j];
+        double totalMonth;
+        
+        int pos = 0;
+        for (int i = 0; i < 12; i++) {
+            totalMonth = 0;
+            for (int j = 0; j < avgDayPerYear.length; j++) {
+                // if leap-year
+                if (i % 4 == 0 && i % 100 != 0) {
+                    monthDays[FEBRUARY] = 29;
+                } else {
+                    monthDays[FEBRUARY] = 28;
+                }
+                
+                for (int k = 0; k < monthDays[i]; k++) {
+                    totalMonth += avgDayPerYear[j][pos + k];
+                }
+                
+                avgMonth[i] = totalMonth / avgDayPerYear.length / monthDays[i];
+                
+                pos += monthDays[i];
             }
-            day += monthDays[i];
-            avgMonth[i] = totalMonth / monthDays[i];
-        }
-
-        for (int i = 0; i < avgMonth.length; i++) {
-            System.out.println(avgMonth[i]);
         }
     }
-*/
+
+    public void computeAvgQuarter() {
+        avgQuarter = new double[4];
+        
+        double totalQuarter;
+        for (int i = 0; i < getAvgQuarter().length; i++) {
+            totalQuarter = 0;
+            for (int j = 0; j < 3; j++) {
+                totalQuarter += getAvgMonth()[j + i*3];
+            }
+            
+            avgQuarter[i] = totalQuarter / 3;
+        }
+    }
+    
     Data getData() {
         return data;
     }
 
     void setData(Data data) {
         this.data = data;
+    }
+
+    /**
+     * @return the avgWeek
+     */
+    public double[] getAvgWeek() {
+        return avgWeek;
+    }
+
+    /**
+     * @return the avgMonth
+     */
+    public double[] getAvgMonth() {
+        return avgMonth;
+    }
+
+    /**
+     * @return the avgQuarter
+     */
+    public double[] getAvgQuarter() {
+        return avgQuarter;
     }
 }
