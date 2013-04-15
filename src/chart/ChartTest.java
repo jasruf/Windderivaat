@@ -30,62 +30,13 @@ import org.jfree.data.xy.XYSeriesCollection;
  *
  * @author Loki
  */
-public class ChartTest extends JFrame {
-    JLayeredPane jLayer;
-    ChartTest(String applicationTitle, String chartTitle) {
-        super(applicationTitle);
-        
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        jLayer = new JLayeredPane();
-        this.setLayout(new BorderLayout());
-        this.add(jLayer, BorderLayout.CENTER);
-
-        //jLayer.setB
-        // This will create the dataset 
-        CategoryDataset dataset = createCategoryDataset();
-        
-        
-        ChartViewer chartPanel = new ChartViewer(createAvgDataset(), createHistogramDataset(),
-                dataset, dataset, dataset, dataset);
-        
-        chartPanel.setBounds(0, 0, 800, 1300);
-
-        // add it to our application
-        jLayer.add(chartPanel);
-        setContentPane(jLayer);
-        
-        setExtendedState(MAXIMIZED_BOTH);
-        setPreferredSize(new java.awt.Dimension(600, 500));
-    }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
-        Data data = null;
-        try {
-            data = new Data("/Users/Tony/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");
-            data.fill();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Formulas.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Formulas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        Formulas obj = new Formulas(data, 1993, 2001);
-        obj.computeAvgDay();
-        obj.computeAvgMonth();
-    }
-    
+public class ChartTest {
     
     /**
      * Creates a sample dataset 
      */
 
-    private CategoryDataset createCategoryDataset() {
+    public static CategoryDataset createCategoryDataset() {
         
         // row keys...
         final String series1 = "First";
@@ -136,7 +87,7 @@ public class ChartTest extends JFrame {
                 
     }
     
-    private HistogramDataset createHistogramDataset() {
+    public static HistogramDataset createHistogramDataset() {
         double[] dummyVal = { 0.0, 0.0, 0.0, 0.3 ,0.5, 0.5, 0.8 };
         
         HistogramDataset histogram = new HistogramDataset();
@@ -150,7 +101,7 @@ public class ChartTest extends JFrame {
      * Creates an Average dataset.
      * @return An average dataset.
      */
-    private XYDataset createAvgDataset() {    
+    public static XYDataset createAvgDataset() {    
         final XYSeriesCollection data = new XYSeriesCollection();
         
         for( int x = 0; x < 8; x++) {
@@ -173,7 +124,7 @@ public class ChartTest extends JFrame {
      * @param dataset  the dataset.
      * @return A sample chart.
      */
-    private JFreeChart createChart(final XYDataset dataset) {
+    public static JFreeChart createChart(final XYDataset dataset) {
         final JFreeChart chart = ChartFactory.createPolarChart("", dataset, true, true, false); 
         final PolarPlot plot = (PolarPlot) chart.getPlot();
         plot.setBackgroundPaint(Color.WHITE);
