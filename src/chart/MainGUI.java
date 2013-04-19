@@ -185,8 +185,7 @@ public class MainGUI extends javax.swing.JFrame {
         
         
         Formulas obj = new Formulas(data, 1993, 2001);
-        obj.computeAvgDay();
-        obj.computeAvgMonth();
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel chartViewer;
