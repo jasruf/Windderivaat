@@ -5,7 +5,6 @@
 package chart;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
@@ -40,26 +39,26 @@ public class ChartViewer extends JPanel {
         this.setLayout(new BorderLayout());
         this.add(jLayer, BorderLayout.CENTER);
         
-        JFreeChart polar = ChartFactory.createPolarChart("", polarData, false, false, false);
-        JFreeChart sumWindspeedWeekChart = ChartFactory.createLineChart("", "", "", 
+        JFreeChart polar = ChartFactory.createPolarChart("", polarData, true, true, true);
+        JFreeChart sumWindspeedWeekChart = ChartFactory.createLineChart("a", "", "", 
                 sumWindspeedWeekData, PlotOrientation.VERTICAL,
-                false, false, false);
+                true, true, true);
         
-        JFreeChart sumWindspeedMonthChart = ChartFactory.createLineChart("", "", "", 
+        JFreeChart sumWindspeedMonthChart = ChartFactory.createLineChart("b", "", "", 
                 sumWindspeedMonthData, PlotOrientation.VERTICAL,
-                false, false, false);
+                true, true, true);
         
-        JFreeChart sumWindspeedQuarterChart = ChartFactory.createLineChart("", "", "", 
+        JFreeChart sumWindspeedQuarterChart = ChartFactory.createLineChart("c", "", "", 
                 sumWindspeedQuarterData, PlotOrientation.VERTICAL,
-                false, false, false);
+                true, true, true);
         
-        JFreeChart avgWindspeedChart = ChartFactory.createLineChart("", "", "", 
+        JFreeChart avgWindspeedChart = ChartFactory.createLineChart("d", "", "", 
                 avgWindspeedData, PlotOrientation.VERTICAL,
-                false, false, false);
+                true, true, true);
         
-        JFreeChart histogramChart = ChartFactory.createHistogram("", "", "",
+        JFreeChart histogramChart = ChartFactory.createHistogram("e", "", "",
                 histogramData, PlotOrientation.VERTICAL,
-                false, false, false);
+                true, true, true);
         
         polarChart = new ChartPanel(polar);
         

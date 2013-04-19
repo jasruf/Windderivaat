@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
+import math.ChartDataset;
 import math.Formulas;
 
 import org.jfree.chart.ChartFactory;
@@ -31,6 +32,8 @@ import org.jfree.data.xy.XYSeriesCollection;
  * @author Loki
  */
 public class ChartTest extends JFrame {
+    static ChartDataset obj;
+    
     JLayeredPane jLayer;
     ChartTest(String applicationTitle, String chartTitle) {
         super(applicationTitle);
@@ -46,10 +49,10 @@ public class ChartTest extends JFrame {
         CategoryDataset dataset = createCategoryDataset();
         
         
-        ChartViewer chartPanel = new ChartViewer(createAvgDataset(), createHistogramDataset(),
-                dataset, dataset, dataset, dataset);
+        ChartViewer chartPanel = new ChartViewer(this.createAvgDataset(), obj.getWindspeed(),
+                obj.getSumWindspeedWeek(), obj.getSumWindspeedMonth(), obj.getSumWindspeedQuarter(), obj.getAvgWindspeedHourMonth());
         
-        chartPanel.setBounds(0, 0, 800, 1300);
+        chartPanel.setBounds(0, 0, 1400, 1300);
 
         // add it to our application
         jLayer.add(chartPanel);
@@ -67,7 +70,7 @@ public class ChartTest extends JFrame {
         Data data = null;
         try {
             // data = new Data("/Users/Tony/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");
-            data = new Data("D:/Users/Marco/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");
+            data = new Data("/home/loki/Documents/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");
             data.fill();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Formulas.class.getName()).log(Level.SEVERE, null, ex);
@@ -75,11 +78,27 @@ public class ChartTest extends JFrame {
             Logger.getLogger(Formulas.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        obj = new ChartDataset(data);
         
-        Formulas obj = new Formulas(data, 1993, 2001);
-        obj.computeAvgDay();
-        obj.computeAvgWeek();
-        obj.computeAvgMonth();
+        obj.setInterval(1992, 1993);
+        ChartTest test = new ChartTest("", "");
+        test.setVisible(true);
+ /*       
+        int pos = -1;
+        for (int i = 0; i < data.getDateArray().size(); i++) {
+            if(data.getDateArray().get(i).getTime().getHours() != i%24) {
+                
+                System.out.println("shit\n:"
+                        +data.getDateArray().get(i).getTime().getHours()+
+                        ": :"
+                        +i%24+
+                        ": "
+                        +data.getDateArray().get(i).getTime().getDay() +" "+data.getDateArray().get(i).getTime().getMonth()+" "+data.getDateArray().get(i).getTime().getYear());
+            }
+            
+            pos = data.getDateArray().get(i).getTime().getHours();
+        }
+*/        
     }
     
     

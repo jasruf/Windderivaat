@@ -7,6 +7,7 @@ package math;
 import chart.Data;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,32 +19,40 @@ public class Formulas {
 
     final int FEBRUARY = 1;
 //    Data data = new Data("/Users/Tony/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");
-    Data data;
-    int yearStart, yearEnd;
-    double[][] avgDayPerYear;
+    private Data data;
+    private int yearStart, yearEnd;
+    
+    private double[][] avgDayPerYear;
     private double[] avgWeek;
     private double[] avgMonth;
     private double[] avgQuarter;
+    private double[][] avgMonthHour;
     
-    int monthDays[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private static int monthDays[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     public Formulas(Data data, int yearStart, int yearEnd) {
         this.yearStart = yearStart;
         this.yearEnd = yearEnd;
 
         this.data = data;
+        
+        this.computeAvgDay();
+        this.computeAvgWeek();
+        this.computeAvgMonth();
+        this.computeAvgQuarter();
+        this.computeAvgMonthHour();
     }
 
-    public void computeAvgDay() {
+    private void computeAvgDay() {
         // Skip to start year
         final int yearFirst = 1991;
 
 
         int skipHours = 0;
-        for (int i = yearFirst; i < yearStart; i++) {
+        for (int i = 0; i < yearStart - yearFirst; i++) {
 
             // if leap-year update february
-            if (i % 4 == 0 && i % 100 != 0) {
+            if (isLeapyear(i)) {
                 monthDays[FEBRUARY] = 29;
             } else {
                 monthDays[FEBRUARY] = 28;
@@ -59,8 +68,7 @@ public class Formulas {
         for (int i = 0; i < yearEnd - yearStart; i++) {
             int daysInYear;
 
-            // if leap-year
-            if (i % 4 == 0 && i % 100 != 0) {
+            if (isLeapyear(i)) {
                 daysInYear = 366;
             } else {
                 daysInYear = 365;
@@ -74,14 +82,14 @@ public class Formulas {
             for (int j = 0; j < avgDayPerYear[i].length; j++) {
                 totalDay = 0;
                 for (int z = 0; z < 24; z++) {
-                    totalDay += data.getWindSpeedArray().get(skipHours++);
+                    totalDay += getData().getWindSpeedArray().get(skipHours++);
                 }
                 avgDayPerYear[i][j] = totalDay / 24;
             }
         }
     }
 
-    public void computeAvgWeek() {
+    private void computeAvgWeek() {
         avgWeek = new double[52];
 
         double totalWeek;
@@ -103,49 +111,103 @@ public class Formulas {
         }
     }
 
-    public void computeAvgMonth() {
+    private void computeAvgMonth() {
 
         avgMonth = new double[12];
 
         double totalMonth;
-        
-        int pos = 0;
+
+        int pos;
         for (int i = 0; i < 12; i++) {
+            pos = 0;
+            
             totalMonth = 0;
             for (int j = 0; j < avgDayPerYear.length; j++) {
                 // if leap-year
-                if (i % 4 == 0 && i % 100 != 0) {
+                if ((j + yearStart) % 4 == 0 && (j + yearStart) % 100 != 0) {
                     monthDays[FEBRUARY] = 29;
                 } else {
                     monthDays[FEBRUARY] = 28;
                 }
-                
+
                 for (int k = 0; k < monthDays[i]; k++) {
                     totalMonth += avgDayPerYear[j][pos + k];
                 }
-                
+
                 avgMonth[i] = totalMonth / avgDayPerYear.length / monthDays[i];
-                
+
                 pos += monthDays[i];
             }
         }
     }
 
-    public void computeAvgQuarter() {
+    private void computeAvgQuarter() {
         avgQuarter = new double[4];
-        
+
         double totalQuarter;
         for (int i = 0; i < getAvgQuarter().length; i++) {
             totalQuarter = 0;
             for (int j = 0; j < 3; j++) {
-                totalQuarter += getAvgMonth()[j + i*3];
+                totalQuarter += getAvgMonth()[j + i * 3];
             }
-            
+
             avgQuarter[i] = totalQuarter / 3;
         }
     }
+
+    private void computeAvgMonthHour() {
+        final int monthsInYear = 12;
+        final int hoursInDay = 24;
+
+        this.avgMonthHour = new double[monthsInYear][hoursInDay];
+
+        double[] totalHour;
+        int pos = 0;
+
+        // Every year.
+        for (int y = 0; y < yearEnd - yearStart; y++) {
+            if (isLeapyear(y)) {
+                monthDays[FEBRUARY] = 29;
+            } else {
+                monthDays[FEBRUARY] = 28;
+            }
+
+            // Compute total of every hour in month
+            for (int x = 0; x < monthsInYear; x++) {
+                for (int i = 0; i < monthDays[x]; i++) {
+
+                    for (int z = 0; z < hoursInDay; z++) {
+                        avgMonthHour[x][z] += getData().getWindSpeedArray().get(pos++);
+                    }
+                }
+            }
+            
+            // Compute average of every hour in month
+            for(int x = 0; x < monthsInYear; x++) {
+                for (int z = 0; z < hoursInDay; z++) {
+                        avgMonthHour[x][z] = avgMonthHour[x][z] / monthDays[x];
+                    }
+            }
+        }
+    }
+
+    private boolean isLeapyear(int year) {
+        return (year + yearStart) % 4 == 0 && (year + yearStart) % 100 != 0;
+    }
+
+    public double[] getWindSpeedArray() {
+        double[] windSpeed = new double[data.getWindSpeedArray().size()];
+        
+        for (int i = 0; i < windSpeed.length; i++) {
+            windSpeed[i] = data.getWindSpeedArray().get(i);
+            
+            // System.out.println(windSpeed[i]);
+        }
+        
+        return windSpeed;
+    }
     
-    Data getData() {
+    public Data getData() {
         return data;
     }
 
@@ -172,5 +234,12 @@ public class Formulas {
      */
     public double[] getAvgQuarter() {
         return avgQuarter;
+    }
+
+    /**
+     * @return the avgMonthHour
+     */
+    public double[][] getAvgMonthHour() {
+        return avgMonthHour;
     }
 }
