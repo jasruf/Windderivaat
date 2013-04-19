@@ -2,12 +2,15 @@ package chart;
 
 import chart.ChartTest;
 import java.awt.BorderLayout;
+import java.awt.Frame;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import math.ChartDataset;
 import math.Formulas;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -51,7 +54,7 @@ public class MainGUI extends javax.swing.JFrame {
         chartViewer.setLayout(chartViewerLayout);
         chartViewerLayout.setHorizontalGroup(
             chartViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 328, Short.MAX_VALUE)
+            .addGap(0, 633, Short.MAX_VALUE)
         );
         chartViewerLayout.setVerticalGroup(
             chartViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -63,7 +66,7 @@ public class MainGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(572, Short.MAX_VALUE)
+                .addContainerGap(267, Short.MAX_VALUE)
                 .addComponent(chartViewer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -89,7 +92,7 @@ public class MainGUI extends javax.swing.JFrame {
     private ChartPanel histogram;
     private ChartPanel avgWindspeed;
     
-    public void addGraph(XYDataset polarData, HistogramDataset histogramData,
+    public void allocGraphs(XYDataset polarData, HistogramDataset histogramData,
             CategoryDataset sumWindspeedWeekData, CategoryDataset sumWindspeedMonthData,
             CategoryDataset sumWindspeedQuarterData, CategoryDataset avgWindspeedData) {
         
@@ -130,6 +133,7 @@ public class MainGUI extends javax.swing.JFrame {
         sumWindspeedQuarter.setBounds(0, chartHeight * 2, chartWidth, chartHeight);
         histogram.setBounds(chartWidth, chartHeight * 2, chartWidth, chartHeight);
         
+        chartViewer.removeAll();
         chartViewer.add(polarChart);
         chartViewer.add(avgWindspeed);
         chartViewer.add(histogram);
@@ -162,20 +166,15 @@ public class MainGUI extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        
         /* Create and display the form */
         MainGUI v = new MainGUI();
         
-        v.addGraph(ChartTest.createAvgDataset(),
-                ChartTest.createHistogramDataset(),
-                ChartTest.createCategoryDataset(),
-                ChartTest.createCategoryDataset(),
-                ChartTest.createCategoryDataset(),
-                ChartTest.createCategoryDataset());
-        v.setVisible(true);
+        v.setExtendedState(v.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         
         Data data = null;
         try {
-            data = new Data("/Users/JASEEN/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");
+            data = new Data("/home/loki/Documents/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");
             data.fill();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Formulas.class.getName()).log(Level.SEVERE, null, ex);
@@ -184,8 +183,19 @@ public class MainGUI extends javax.swing.JFrame {
         }
         
         
-        Formulas obj = new Formulas(data, 1993, 2001);
-
+        ChartDataset obj = new ChartDataset(data);
+        obj.setInterval(1991, 1992);
+        
+        v.allocGraphs(
+                ChartTest.createAvgDataset(),
+                obj.getWindspeed(),
+                obj.getSumWindspeedWeek(),
+                obj.getSumWindspeedMonth(),
+                obj.getSumWindspeedQuarter(),
+                obj.getAvgWindspeedHourMonth()
+        );
+        
+        v.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel chartViewer;

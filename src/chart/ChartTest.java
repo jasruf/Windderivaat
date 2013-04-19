@@ -4,16 +4,8 @@
  */
 package chart;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JLayeredPane;
-import math.ChartDataset;
-import math.Formulas;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
