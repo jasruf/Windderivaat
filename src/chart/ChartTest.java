@@ -31,82 +31,13 @@ import org.jfree.data.xy.XYSeriesCollection;
  *
  * @author Loki
  */
-public class ChartTest extends JFrame {
-    static ChartDataset obj;
-    
-    JLayeredPane jLayer;
-    ChartTest(String applicationTitle, String chartTitle) {
-        super(applicationTitle);
-        
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        jLayer = new JLayeredPane();
-        this.setLayout(new BorderLayout());
-        this.add(jLayer, BorderLayout.CENTER);
-
-        //jLayer.setB
-        // This will create the dataset 
-        CategoryDataset dataset = createCategoryDataset();
-        
-        
-        ChartViewer chartPanel = new ChartViewer(this.createAvgDataset(), obj.getWindspeed(),
-                obj.getSumWindspeedWeek(), obj.getSumWindspeedMonth(), obj.getSumWindspeedQuarter(), obj.getAvgWindspeedHourMonth());
-        
-        chartPanel.setBounds(0, 0, 1400, 1300);
-
-        // add it to our application
-        jLayer.add(chartPanel);
-        setContentPane(jLayer);
-        
-        setExtendedState(MAXIMIZED_BOTH);
-        setPreferredSize(new java.awt.Dimension(600, 500));
-    }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
-        Data data = null;
-        try {
-            // data = new Data("/Users/Tony/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");
-            data = new Data("/home/loki/Documents/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");
-            data.fill();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Formulas.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Formulas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        obj = new ChartDataset(data);
-        
-        obj.setInterval(1992, 1993);
-        ChartTest test = new ChartTest("", "");
-        test.setVisible(true);
- /*       
-        int pos = -1;
-        for (int i = 0; i < data.getDateArray().size(); i++) {
-            if(data.getDateArray().get(i).getTime().getHours() != i%24) {
-                
-                System.out.println("shit\n:"
-                        +data.getDateArray().get(i).getTime().getHours()+
-                        ": :"
-                        +i%24+
-                        ": "
-                        +data.getDateArray().get(i).getTime().getDay() +" "+data.getDateArray().get(i).getTime().getMonth()+" "+data.getDateArray().get(i).getTime().getYear());
-            }
-            
-            pos = data.getDateArray().get(i).getTime().getHours();
-        }
-*/        
-    }
-    
+public class ChartTest {
     
     /**
      * Creates a sample dataset 
      */
 
-    private CategoryDataset createCategoryDataset() {
+    public static CategoryDataset createCategoryDataset() {
         
         // row keys...
         final String series1 = "First";
@@ -157,7 +88,7 @@ public class ChartTest extends JFrame {
                 
     }
     
-    private HistogramDataset createHistogramDataset() {
+    public static HistogramDataset createHistogramDataset() {
         double[] dummyVal = { 0.0, 0.0, 0.0, 0.3 ,0.5, 0.5, 0.8 };
         
         HistogramDataset histogram = new HistogramDataset();
@@ -171,7 +102,7 @@ public class ChartTest extends JFrame {
      * Creates an Average dataset.
      * @return An average dataset.
      */
-    private XYDataset createAvgDataset() {    
+    public static XYDataset createAvgDataset() {    
         final XYSeriesCollection data = new XYSeriesCollection();
         
         for( int x = 0; x < 8; x++) {
@@ -194,7 +125,7 @@ public class ChartTest extends JFrame {
      * @param dataset  the dataset.
      * @return A sample chart.
      */
-    private JFreeChart createChart(final XYDataset dataset) {
+    public static JFreeChart createChart(final XYDataset dataset) {
         final JFreeChart chart = ChartFactory.createPolarChart("", dataset, true, true, false); 
         final PolarPlot plot = (PolarPlot) chart.getPlot();
         plot.setBackgroundPaint(Color.WHITE);
