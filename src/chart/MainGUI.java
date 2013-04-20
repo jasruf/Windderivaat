@@ -1,24 +1,14 @@
 package chart;
 
-import chart.ChartTest;
-import java.awt.BorderLayout;
-import java.awt.Frame;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 import math.ChartDataset;
 import math.Formulas;
-import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.statistics.HistogramDataset;
-import org.jfree.data.xy.XYDataset;
 
 /*
  * To change this template, choose Tools | Templates
