@@ -5,6 +5,9 @@
 package math;
 
 import chart.Data;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.statistics.HistogramDataset;
@@ -119,42 +122,50 @@ public class ChartDataset {
     /**
      * @return the windspeed
      */
-    public HistogramDataset getWindspeed() {
-        return windspeed;
+    public JFreeChart getWindspeed() {
+        return ChartFactory.createHistogram("", "", "", windspeed, PlotOrientation.VERTICAL, true, true, true);
     }
 
     /**
      * @return the sumWindspeedQuarter
      */
-    public CategoryDataset getSumWindspeedQuarter() {
-        return sumWindspeedQuarter;
+    public JFreeChart getSumWindspeedQuarter() {
+        return ChartFactory.createLineChart("", "", "",
+                sumWindspeedQuarter, PlotOrientation.VERTICAL,
+                true, true, true);
     }
 
     /**
      * @return the sumWindspeedMonth
      */
-    public CategoryDataset getSumWindspeedMonth() {
-        return sumWindspeedMonth;
+    public JFreeChart getSumWindspeedMonth() {
+        return ChartFactory.createLineChart("", "", "",
+                sumWindspeedMonth, PlotOrientation.VERTICAL,
+                true, true, true);
     }
 
     /**
      * @return the sumWindspeedWeek
      */
-    public CategoryDataset getSumWindspeedWeek() {
-        return sumWindspeedWeek;
+    public JFreeChart getSumWindspeedWeek() {
+        return ChartFactory.createLineChart("", "", "",
+                sumWindspeedWeek, PlotOrientation.VERTICAL,
+                true, true, true);
     }
 
     /**
      * @return the avgWindspeedHourMonth
      */
-    public CategoryDataset getAvgWindspeedHourMonth() {
-        return avgWindspeedHourMonth;
+    public JFreeChart getAvgWindspeedHourMonth() {
+        return ChartFactory.createLineChart("", "", "",
+                avgWindspeedHourMonth, PlotOrientation.VERTICAL,
+                true, true, true);
     }
 
     /**
      * @return the polarData
      */
-    public XYDataset getPolarData() {
-        return polarData;
+    public JFreeChart getPolarData() {
+        return ChartFactory.createPolarChart("", polarData, true, true, true);
     }
 }

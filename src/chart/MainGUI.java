@@ -92,31 +92,13 @@ public class MainGUI extends javax.swing.JFrame {
     private ChartPanel histogram;
     private ChartPanel avgWindspeed;
     
-    public void allocGraphs(XYDataset polarData, HistogramDataset histogramData,
-            CategoryDataset sumWindspeedWeekData, CategoryDataset sumWindspeedMonthData,
-            CategoryDataset sumWindspeedQuarterData, CategoryDataset avgWindspeedData) {
-        
-        JFreeChart polar = ChartFactory.createPolarChart("", polarData, false, false, false);
-        JFreeChart sumWindspeedWeekChart = ChartFactory.createLineChart("", "", "",
-                sumWindspeedWeekData, PlotOrientation.VERTICAL,
-                false, false, false);
-        
-        JFreeChart sumWindspeedMonthChart = ChartFactory.createLineChart("", "", "",
-                sumWindspeedMonthData, PlotOrientation.VERTICAL,
-                false, false, false);
-        
-        JFreeChart sumWindspeedQuarterChart = ChartFactory.createLineChart("", "", "",
-                sumWindspeedQuarterData, PlotOrientation.VERTICAL,
-                false, false, false);
-        
-        JFreeChart avgWindspeedChart = ChartFactory.createLineChart("", "", "",
-                avgWindspeedData, PlotOrientation.VERTICAL,
-                false, false, false);
-        
-        JFreeChart histogramChart = ChartFactory.createHistogram("", "", "",
-                histogramData, PlotOrientation.VERTICAL,
-                false, false, false);
-        
+    public void initGraphs(JFreeChart polar,
+            JFreeChart sumWindspeedWeekChart,
+            JFreeChart sumWindspeedMonthChart,
+            JFreeChart sumWindspeedQuarterChart,
+            JFreeChart avgWindspeedChart,
+            JFreeChart histogramChart) 
+    {
         polarChart = new ChartPanel(polar);
         
         avgWindspeed = new ChartPanel(sumWindspeedWeekChart);
@@ -186,13 +168,13 @@ public class MainGUI extends javax.swing.JFrame {
         ChartDataset obj = new ChartDataset(data);
         obj.setInterval(1991, 1992);
         
-        v.allocGraphs(
-                ChartTest.createAvgDataset(),
-                obj.getWindspeed(),
+        v.initGraphs(
+                obj.getPolarData(),
                 obj.getSumWindspeedWeek(),
                 obj.getSumWindspeedMonth(),
                 obj.getSumWindspeedQuarter(),
-                obj.getAvgWindspeedHourMonth()
+                obj.getAvgWindspeedHourMonth(),
+                obj.getWindspeed()
         );
         
         v.setVisible(true);
