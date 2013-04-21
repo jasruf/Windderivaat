@@ -24,17 +24,6 @@ import java.util.logging.Logger;
  * @author Tony
  */
 public class Data {    
-    // This main was added for testing only
-//    public static void main(String[] args) { 
-//        Data data = new Data("/Users/Tony/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");//In the arguments give the path of the data documents 
-//        try {
-//            data.fill();
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(Data.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(Data.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
     
     private final int skipLines;// How many line to skip 
     private List<Calendar> dateArray = new ArrayList<Calendar>();// ArrayList for the date 
