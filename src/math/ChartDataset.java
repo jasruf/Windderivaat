@@ -54,6 +54,7 @@ public class ChartDataset {
         this.computeSumWindspeedWeek();
         this.computeSumWindspeedQuarter();
         this.computeSumWindspeedMonth();
+        this.computePolarData();
         
         this.computeWindspeed();
     }
@@ -117,31 +118,52 @@ public class ChartDataset {
     }
 
     private void computePolarData() {
+        
     }
 
     /**
      * @return the windspeed
      */
     public JFreeChart getWindspeed() {
-        return ChartFactory.createHistogram("", "", "", windspeed, PlotOrientation.VERTICAL, true, true, true);
+        JFreeChart chart = ChartFactory.createHistogram("", "", "", windspeed, PlotOrientation.VERTICAL, true, true, true);
+        
+        chart.getXYPlot().getDomainAxis().setRange(0.00, 30.00);
+        
+        return chart;
     }
 
     /**
      * @return the sumWindspeedQuarter
      */
     public JFreeChart getSumWindspeedQuarter() {
-        return ChartFactory.createLineChart("", "", "",
+        JFreeChart chart = ChartFactory.createLineChart("", "", "",
                 sumWindspeedQuarter, PlotOrientation.VERTICAL,
                 true, true, true);
+        
+        ValueSummary minMax = ValueSummary.init(formula.getAvgQuarter());
+        double maxY = (int)minMax.max + 1;
+        double minY = (int)minMax.min;
+        
+        chart.getCategoryPlot().getRangeAxis().setRange(minY, maxY);
+        
+        return chart;
     }
 
     /**
      * @return the sumWindspeedMonth
      */
     public JFreeChart getSumWindspeedMonth() {
-        return ChartFactory.createLineChart("", "", "",
+        JFreeChart chart = ChartFactory.createLineChart("", "", "",
                 sumWindspeedMonth, PlotOrientation.VERTICAL,
                 true, true, true);
+        
+        ValueSummary minMax = ValueSummary.init(formula.getAvgQuarter());
+        double maxY = (int)minMax.max + 1;
+        double minY = (int)minMax.min;
+        
+        chart.getCategoryPlot().getRangeAxis().setRange(minY, maxY);
+        
+        return chart;
     }
 
     /**
@@ -157,9 +179,17 @@ public class ChartDataset {
      * @return the avgWindspeedHourMonth
      */
     public JFreeChart getAvgWindspeedHourMonth() {
-        return ChartFactory.createLineChart("", "", "",
+        JFreeChart chart = ChartFactory.createLineChart("", "", "",
                 avgWindspeedHourMonth, PlotOrientation.VERTICAL,
                 true, true, true);
+        
+        ValueSummary minMax = ValueSummary.init(formula.getAvgMonthHour());
+        double maxY = (int)minMax.max + 1;
+        double minY = (int)minMax.min;
+        
+        chart.getCategoryPlot().getRangeAxis().setRange(minY, maxY);
+        
+        return chart;
     }
 
     /**
