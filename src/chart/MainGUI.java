@@ -15,8 +15,8 @@ import org.jfree.chart.JFreeChart;
  * and open the template in the editor.
  */
 /**
- *
- * @author JASEEN
+ * GUI initialised at startup.
+ * @author JASEEN, Loki
  */
 public class MainGUI extends javax.swing.JFrame {
 
@@ -74,7 +74,7 @@ public class MainGUI extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     final int chartWidth = 300;
-    final int chartHeight = 200;
+    final int chartHeight = 250;
     private ChartPanel polarChart;
     private ChartPanel sumWindspeedWeek;
     private ChartPanel sumWindspeedMonth;
@@ -98,13 +98,9 @@ public class MainGUI extends javax.swing.JFrame {
         sumWindspeedWeek = new ChartPanel(avgWindspeedChart);
         histogram = new ChartPanel(histogramChart);
         
-        sumWindspeedWeek.setBounds(0, 0, chartWidth, chartHeight);
-        polarChart.setBounds(chartWidth, 0, chartWidth, chartHeight);
-        sumWindspeedMonth.setBounds(0, chartHeight, chartWidth, chartHeight);
-        avgWindspeed.setBounds(chartWidth, chartHeight, chartWidth, chartHeight);
-        sumWindspeedQuarter.setBounds(0, chartHeight * 2, chartWidth, chartHeight);
-        histogram.setBounds(chartWidth, chartHeight * 2, chartWidth, chartHeight);
-        
+ 
+        setupCharts();
+                
         chartViewer.removeAll();
         chartViewer.add(polarChart);
         chartViewer.add(avgWindspeed);
@@ -112,6 +108,36 @@ public class MainGUI extends javax.swing.JFrame {
         chartViewer.add(sumWindspeedQuarter);
         chartViewer.add(sumWindspeedMonth);
         chartViewer.add(sumWindspeedWeek);
+    }
+    
+    /**
+     * Initial setup of charts.
+     */
+    private void setupCharts() {        
+        sumWindspeedWeek.setBounds(0, 0, chartWidth, chartHeight);
+        polarChart.setBounds(chartWidth, 0, chartWidth, chartHeight);
+        sumWindspeedMonth.setBounds(0, chartHeight, chartWidth, chartHeight);
+        avgWindspeed.setBounds(chartWidth, chartHeight, chartWidth, chartHeight);
+        sumWindspeedQuarter.setBounds(0, chartHeight * 2, chartWidth, chartHeight);
+        histogram.setBounds(chartWidth, chartHeight * 2, chartWidth, chartHeight);
+        
+        sumWindspeedWeek.setDomainZoomable(false);
+        sumWindspeedWeek.setRangeZoomable(false);
+        
+        sumWindspeedMonth.setDomainZoomable(false);
+        sumWindspeedMonth.setRangeZoomable(false);
+        
+        sumWindspeedQuarter.setDomainZoomable(false);
+        sumWindspeedQuarter.setRangeZoomable(false);
+        
+        avgWindspeed.setDomainZoomable(false);
+        avgWindspeed.setRangeZoomable(false);
+        
+        histogram.setDomainZoomable(false);
+        histogram.setRangeZoomable(false);
+        
+        polarChart.setDomainZoomable(false);
+        polarChart.setRangeZoomable(false);
     }
     
     public static void main(String args[]) {

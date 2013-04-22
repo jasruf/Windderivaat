@@ -12,6 +12,9 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.statistics.HistogramDataset;
 import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.ui.RectangleEdge;
 
 /**
  *
@@ -118,7 +121,21 @@ public class ChartDataset {
     }
 
     private void computePolarData() {
+        XYSeriesCollection polarData = new XYSeriesCollection();
         
+        
+        for( int x = 0; x < 8; x++) {
+            XYSeries series = new XYSeries("Series"+x);
+            
+            series.add(0, 0);
+            for( int y = 0; y < 2; y++ ) {
+                series.add((x*45)+(y*45 + 45),(25*x+25)%7+19);
+            }
+            //data.setIntervalWidth(1);
+            polarData.addSeries(series);
+        }
+        
+        this.polarData = polarData;
     }
 
     /**
@@ -188,6 +205,7 @@ public class ChartDataset {
         double minY = (int)minMax.min;
         
         chart.getCategoryPlot().getRangeAxis().setRange(minY, maxY);
+        chart.getLegend().setPosition(RectangleEdge.RIGHT);
         
         return chart;
     }
