@@ -1,29 +1,22 @@
 package chart;
 
-import chart.ChartTest;
-import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
+import javax.swing.JFrame;
+import math.ChartDataset;
 import math.Formulas;
-import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.statistics.HistogramDataset;
-import org.jfree.data.xy.XYDataset;
 
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 /**
- *
- * @author JASEEN
+ * GUI initialised at startup.
+ * @author JASEEN, Loki
  */
 public class MainGUI extends javax.swing.JFrame {
 
@@ -51,7 +44,7 @@ public class MainGUI extends javax.swing.JFrame {
         chartViewer.setLayout(chartViewerLayout);
         chartViewerLayout.setHorizontalGroup(
             chartViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 328, Short.MAX_VALUE)
+            .addGap(0, 633, Short.MAX_VALUE)
         );
         chartViewerLayout.setVerticalGroup(
             chartViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -63,7 +56,7 @@ public class MainGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(572, Short.MAX_VALUE)
+                .addContainerGap(267, Short.MAX_VALUE)
                 .addComponent(chartViewer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -81,7 +74,7 @@ public class MainGUI extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     final int chartWidth = 300;
-    final int chartHeight = 200;
+    final int chartHeight = 250;
     private ChartPanel polarChart;
     private ChartPanel sumWindspeedWeek;
     private ChartPanel sumWindspeedMonth;
@@ -89,31 +82,13 @@ public class MainGUI extends javax.swing.JFrame {
     private ChartPanel histogram;
     private ChartPanel avgWindspeed;
     
-    public void addGraph(XYDataset polarData, HistogramDataset histogramData,
-            CategoryDataset sumWindspeedWeekData, CategoryDataset sumWindspeedMonthData,
-            CategoryDataset sumWindspeedQuarterData, CategoryDataset avgWindspeedData) {
-        
-        JFreeChart polar = ChartFactory.createPolarChart("", polarData, false, false, false);
-        JFreeChart sumWindspeedWeekChart = ChartFactory.createLineChart("", "", "",
-                sumWindspeedWeekData, PlotOrientation.VERTICAL,
-                false, false, false);
-        
-        JFreeChart sumWindspeedMonthChart = ChartFactory.createLineChart("", "", "",
-                sumWindspeedMonthData, PlotOrientation.VERTICAL,
-                false, false, false);
-        
-        JFreeChart sumWindspeedQuarterChart = ChartFactory.createLineChart("", "", "",
-                sumWindspeedQuarterData, PlotOrientation.VERTICAL,
-                false, false, false);
-        
-        JFreeChart avgWindspeedChart = ChartFactory.createLineChart("", "", "",
-                avgWindspeedData, PlotOrientation.VERTICAL,
-                false, false, false);
-        
-        JFreeChart histogramChart = ChartFactory.createHistogram("", "", "",
-                histogramData, PlotOrientation.VERTICAL,
-                false, false, false);
-        
+    public void initGraphs(JFreeChart polar,
+            JFreeChart sumWindspeedWeekChart,
+            JFreeChart sumWindspeedMonthChart,
+            JFreeChart sumWindspeedQuarterChart,
+            JFreeChart avgWindspeedChart,
+            JFreeChart histogramChart) 
+    {
         polarChart = new ChartPanel(polar);
         
         avgWindspeed = new ChartPanel(sumWindspeedWeekChart);
@@ -123,6 +98,22 @@ public class MainGUI extends javax.swing.JFrame {
         sumWindspeedWeek = new ChartPanel(avgWindspeedChart);
         histogram = new ChartPanel(histogramChart);
         
+ 
+        setupCharts();
+                
+        chartViewer.removeAll();
+        chartViewer.add(polarChart);
+        chartViewer.add(avgWindspeed);
+        chartViewer.add(histogram);
+        chartViewer.add(sumWindspeedQuarter);
+        chartViewer.add(sumWindspeedMonth);
+        chartViewer.add(sumWindspeedWeek);
+    }
+    
+    /**
+     * Initial setup of charts.
+     */
+    private void setupCharts() {        
         sumWindspeedWeek.setBounds(0, 0, chartWidth, chartHeight);
         polarChart.setBounds(chartWidth, 0, chartWidth, chartHeight);
         sumWindspeedMonth.setBounds(0, chartHeight, chartWidth, chartHeight);
@@ -130,12 +121,23 @@ public class MainGUI extends javax.swing.JFrame {
         sumWindspeedQuarter.setBounds(0, chartHeight * 2, chartWidth, chartHeight);
         histogram.setBounds(chartWidth, chartHeight * 2, chartWidth, chartHeight);
         
-        chartViewer.add(polarChart);
-        chartViewer.add(avgWindspeed);
-        chartViewer.add(histogram);
-        chartViewer.add(sumWindspeedQuarter);
-        chartViewer.add(sumWindspeedMonth);
-        chartViewer.add(sumWindspeedWeek);
+        sumWindspeedWeek.setDomainZoomable(false);
+        sumWindspeedWeek.setRangeZoomable(false);
+        
+        sumWindspeedMonth.setDomainZoomable(false);
+        sumWindspeedMonth.setRangeZoomable(false);
+        
+        sumWindspeedQuarter.setDomainZoomable(false);
+        sumWindspeedQuarter.setRangeZoomable(false);
+        
+        avgWindspeed.setDomainZoomable(false);
+        avgWindspeed.setRangeZoomable(false);
+        
+        histogram.setDomainZoomable(false);
+        histogram.setRangeZoomable(false);
+        
+        polarChart.setDomainZoomable(false);
+        polarChart.setRangeZoomable(false);
     }
     
     public static void main(String args[]) {
@@ -162,20 +164,15 @@ public class MainGUI extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        
         /* Create and display the form */
         MainGUI v = new MainGUI();
         
-        v.addGraph(ChartTest.createAvgDataset(),
-                ChartTest.createHistogramDataset(),
-                ChartTest.createCategoryDataset(),
-                ChartTest.createCategoryDataset(),
-                ChartTest.createCategoryDataset(),
-                ChartTest.createCategoryDataset());
-        v.setVisible(true);
+        v.setExtendedState(v.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         
         Data data = null;
         try {
-            data = new Data("/Users/JASEEN/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");
+            data = new Data("/home/loki/Documents/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");
             data.fill();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Formulas.class.getName()).log(Level.SEVERE, null, ex);
@@ -184,9 +181,19 @@ public class MainGUI extends javax.swing.JFrame {
         }
         
         
-        Formulas obj = new Formulas(data, 1993, 2001);
-        obj.computeAvgDay();
-        obj.computeAvgMonth();
+        ChartDataset obj = new ChartDataset(data);
+        obj.setInterval(1991, 1992);
+        
+        v.initGraphs(
+                obj.getPolarData(),
+                obj.getSumWindspeedWeek(),
+                obj.getSumWindspeedMonth(),
+                obj.getSumWindspeedQuarter(),
+                obj.getAvgWindspeedHourMonth(),
+                obj.getWindspeed()
+        );
+        
+        v.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel chartViewer;
