@@ -37,36 +37,33 @@ public class MainGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         chartViewer = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1000, 750));
+        getContentPane().setLayout(null);
 
         javax.swing.GroupLayout chartViewerLayout = new javax.swing.GroupLayout(chartViewer);
         chartViewer.setLayout(chartViewerLayout);
         chartViewerLayout.setHorizontalGroup(
             chartViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 633, Short.MAX_VALUE)
+            .addGap(0, 720, Short.MAX_VALUE)
         );
         chartViewerLayout.setVerticalGroup(
             chartViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+            .addGap(0, 820, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(267, Short.MAX_VALUE)
-                .addComponent(chartViewer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(chartViewer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        getContentPane().add(chartViewer);
+        chartViewer.setBounds(910, 190, 720, 820);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/GUI Base.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jScrollPane1.setViewportView(jLabel1);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(0, 0, 1690, 1080);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -172,7 +169,7 @@ public class MainGUI extends javax.swing.JFrame {
         
         Data data = null;
         try {
-            data = new Data("/home/loki/Documents/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt");
+            data = new Data("C:\\Users\\Jaseen\\Dropbox\\Project - 107 Simulatie - Prove IT\\test_data_wind.txt");
             data.fill();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Formulas.class.getName()).log(Level.SEVERE, null, ex);
@@ -197,5 +194,7 @@ public class MainGUI extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel chartViewer;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
