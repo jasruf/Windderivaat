@@ -121,21 +121,7 @@ public class ChartDataset {
     }
 
     private void computePolarData() {
-        XYSeriesCollection polarData = new XYSeriesCollection();
         
-        
-        for( int x = 0; x < 8; x++) {
-            XYSeries series = new XYSeries("Series"+x);
-            
-            series.add(0, 0);
-            for( int y = 0; y < 2; y++ ) {
-                series.add((x*45)+(y*45 + 45),(25*x+25)%7+19);
-            }
-            //data.setIntervalWidth(1);
-            polarData.addSeries(series);
-        }
-        
-        this.polarData = polarData;
     }
 
     /**

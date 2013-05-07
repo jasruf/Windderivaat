@@ -169,7 +169,7 @@ public class MainGUI extends javax.swing.JFrame {
         
         Data data = null;
         try {
-            data = new Data("C:\\Users\\Jaseen\\Dropbox\\Project - 107 Simulatie - Prove IT\\test_data_wind.txt");
+            data = new Data("test_data_wind.txt");
             data.fill();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Formulas.class.getName()).log(Level.SEVERE, null, ex);
