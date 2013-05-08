@@ -28,6 +28,7 @@ public class Data {
     private final int skipLines;// How many line to skip 
     private List<Calendar> dateArray = new ArrayList<Calendar>();// ArrayList for the date 
     private List<Double> windSpeedArray = new ArrayList<Double>();//ArrayList for the wind speed 
+    private List<Integer> windAngle = new ArrayList<Integer>();// ArrayList 
     private String data;// String is being used to pick up data from the data documents and is use to fill the array 
     private String fileName;// String being used to tell the program where the data documents is
     private File file;//File is the fileName 
@@ -42,6 +43,7 @@ public class Data {
         skipLines = 22;//
         dateArray = new ArrayList<Calendar>();
         windSpeedArray = new ArrayList<Double>();
+        windAngle = new ArrayList<Integer>();
         data = null;
         fileName = filename; //"/Users/Tony/Dropbox/Prove IT/107 - Simulatie Windderivaten/test_data_wind.txt"
         file = new File(fileName);
@@ -77,9 +79,16 @@ public class Data {
             date = new GregorianCalendar(Integer.parseInt(data.substring(0, 4)), (Integer.parseInt(data.substring(4, 6)) - 1), Integer.parseInt(data.substring(6, 8)), Integer.parseInt(data.substring(9, 11) ) - 1, 0);
             dateArray.add(date);// add the date to the ArrayList and replace 
             windSpeedArray.add(Double.parseDouble(data.substring(20, 23).replaceAll("\\s", "")) / 10);//Add the wind speed to the ArrayList and replaces any spaces with nothing
+            windAngle.add(Integer.parseInt(data.substring(12, 15).replaceAll("\\s", "")));
+      
+          
             
             //System.out.println(dateFormat.format(date.getTime()));//Testing output just after filling the first data into the array 
         }
+//            for (int i = 0; i < windAngle.size(); i++) {//print the wind angle after is has been added to the array list for testing 
+//                System.out.println(windAngle.get(i));  
+//            }
+        
 //        for (int i = 0; i < windSpeedArray.size(); i++) {// print after the list has been tottaly filled 
 //            System.out.println(dateFormat.format(dateArray.get(i).getTime()) + " " + windSpeedArray.get(i));
 //        }
