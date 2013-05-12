@@ -5,6 +5,7 @@
 package main;
 
 import chart.Data;
+import java.awt.Toolkit;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -44,8 +45,9 @@ public class Main {
 
         
         /* Create and display the form */
-        GUI v = new GUI();
-        v.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        GUI gui = new GUI();
+        gui.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        gui.resize(Toolkit.getDefaultToolkit().getScreenSize());
         
         
         
@@ -63,7 +65,7 @@ public class Main {
         ChartDataset obj = new ChartDataset(data);
         obj.setInterval(1991, 1992);
         
-        v.initGraphs(
+        gui.initGraphs(
                 obj.getPolarData(),
                 obj.getSumWindspeedWeek(),
                 obj.getSumWindspeedMonth(),
@@ -73,6 +75,6 @@ public class Main {
         
                 );
         
-        v.setVisible(true);
+        gui.setVisible(true);
     }
 }
