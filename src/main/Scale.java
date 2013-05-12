@@ -4,6 +4,7 @@
  */
 package main;
 
+import java.awt.Component;
 import java.awt.Toolkit;
 import javax.swing.JPanel;
 
@@ -12,7 +13,7 @@ import javax.swing.JPanel;
  * @author loki
  */
 public class Scale {
-    public static void setBounds(JPanel panel, int percentX, int percentY, int percentWidth, int percentHeight) {
+    public static void setBounds(Component panel, int percentX, int percentY, int percentWidth, int percentHeight) {
         Scale scalePos = new Scale(percentX, percentY);
         Scale scaleSize = new Scale(percentWidth, percentHeight);
         
