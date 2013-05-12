@@ -4,15 +4,28 @@
  */
 package main;
 
+import java.awt.Toolkit;
+import javax.swing.JPanel;
+
 /**
  *
  * @author loki
  */
 public class Scale {
+    public static void setBounds(JPanel panel, int percentX, int percentY, int percentWidth, int percentHeight) {
+        Scale scalePos = new Scale(percentX, percentY);
+        Scale scaleSize = new Scale(percentWidth, percentHeight);
+        
+        int width = Toolkit.getDefaultToolkit().getScreenSize().width;
+        int height = Toolkit.getDefaultToolkit().getScreenSize().height;
+        panel.setBounds(scalePos.absX(width), scalePos.absY(height), scaleSize.absX(width), scaleSize.absY(height));
+    }
+    
+    
     private double PercentageX, PercentageY;
     
     
-    Scale(double scaleX, double scaleY) {
+    Scale(int scaleX, int scaleY) {
         setPercentageX(scaleX);
         setPercentageY(scaleY);
     }
@@ -21,8 +34,8 @@ public class Scale {
      * @param absSize
      * @return Percentage * absSize
      */
-    public double absX(double absSize) {
-        return PercentageX*absSize/100;
+    public int absX(int absSize) {
+        return (int)(PercentageX*absSize)/100;
     }
     
     /**
@@ -30,14 +43,14 @@ public class Scale {
      * @param absSize
      * @return Percentage * absSize
      */
-    public double absY(double absSize) {
-        return PercentageY*absSize/100;
+    public int absY(int absSize) {
+        return (int)(PercentageY*absSize)/100;
     }
 
     /**
      * @param scaleX the scaleX to set
      */
-    public void setPercentageX(double scaleX) {
+    public void setPercentageX(int scaleX) {
         if(scaleX < 0) {
             throw new IllegalArgumentException("percentage can't be lower than 0");
         }
@@ -51,7 +64,7 @@ public class Scale {
     /**
      * @param scaleY the scaleY to set
      */
-    public void setPercentageY(double scaleY) {
+    public void setPercentageY(int scaleY) {
         if(scaleY < 0) {
             throw new IllegalArgumentException("percentage can't be lower than 0");
         }
