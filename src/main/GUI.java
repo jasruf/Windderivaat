@@ -29,7 +29,7 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() {
         initComponents();
-        Scale.setBounds(background, 10, 10, 50, 50);
+        Scale.setBounds(background, 0, 0, 100, 100);
         
         int originWidth = background.getIcon().getIconWidth();
         int originHeight = background.getIcon().getIconHeight();
