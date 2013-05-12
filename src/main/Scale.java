@@ -9,15 +9,20 @@ package main;
  * @author loki
  */
 public class Scale {
-    public double scaleX, scaleY;
+    private double PercentageX, PercentageY;
     
+    
+    Scale(double scaleX, double scaleY) {
+        setPercentageX(scaleX);
+        setPercentageY(scaleY);
+    }
     /**
      * 
      * @param absSize
      * @return Percentage * absSize
      */
     public double absX(double absSize) {
-        return scaleX*absSize/100;
+        return PercentageX*absSize/100;
     }
     
     /**
@@ -26,6 +31,34 @@ public class Scale {
      * @return Percentage * absSize
      */
     public double absY(double absSize) {
-        return scaleY*absSize/100;
+        return PercentageY*absSize/100;
+    }
+
+    /**
+     * @param scaleX the scaleX to set
+     */
+    public void setPercentageX(double scaleX) {
+        if(scaleX < 0) {
+            throw new IllegalArgumentException("percentage can't be lower than 0");
+        }
+        if(scaleX > 100) {
+            throw new IllegalArgumentException("percentage can't be higher than 100");
+        }
+        
+        this.PercentageX = scaleX;
+    }
+
+    /**
+     * @param scaleY the scaleY to set
+     */
+    public void setPercentageY(double scaleY) {
+        if(scaleY < 0) {
+            throw new IllegalArgumentException("percentage can't be lower than 0");
+        }
+        if(scaleY > 100) {
+            throw new IllegalArgumentException("percentage can't be higher than 100");
+        }
+        
+        this.PercentageY = scaleY;
     }
 }
