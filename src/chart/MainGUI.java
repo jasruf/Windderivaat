@@ -1,5 +1,6 @@
 package chart;
 
+import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -36,42 +37,114 @@ public class MainGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        chartViewer = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        polarPanel = new javax.swing.JPanel();
+        avgWindSpeedPanel = new javax.swing.JPanel();
+        sumWindSpeedQuarterPanel = new javax.swing.JPanel();
+        sumWindSpeedMonthPanel = new javax.swing.JPanel();
+        sumWindspeedWeekPanel = new javax.swing.JPanel();
+        histogramPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 750));
         getContentPane().setLayout(null);
 
-        javax.swing.GroupLayout chartViewerLayout = new javax.swing.GroupLayout(chartViewer);
-        chartViewer.setLayout(chartViewerLayout);
-        chartViewerLayout.setHorizontalGroup(
-            chartViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+        javax.swing.GroupLayout polarPanelLayout = new javax.swing.GroupLayout(polarPanel);
+        polarPanel.setLayout(polarPanelLayout);
+        polarPanelLayout.setHorizontalGroup(
+            polarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 360, Short.MAX_VALUE)
         );
-        chartViewerLayout.setVerticalGroup(
-            chartViewerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 820, Short.MAX_VALUE)
+        polarPanelLayout.setVerticalGroup(
+            polarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 260, Short.MAX_VALUE)
         );
 
-        getContentPane().add(chartViewer);
-        chartViewer.setBounds(910, 190, 720, 820);
+        getContentPane().add(polarPanel);
+        polarPanel.setBounds(910, 740, 360, 260);
+
+        javax.swing.GroupLayout avgWindSpeedPanelLayout = new javax.swing.GroupLayout(avgWindSpeedPanel);
+        avgWindSpeedPanel.setLayout(avgWindSpeedPanelLayout);
+        avgWindSpeedPanelLayout.setHorizontalGroup(
+            avgWindSpeedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 350, Short.MAX_VALUE)
+        );
+        avgWindSpeedPanelLayout.setVerticalGroup(
+            avgWindSpeedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 260, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(avgWindSpeedPanel);
+        avgWindSpeedPanel.setBounds(1280, 190, 350, 260);
+
+        javax.swing.GroupLayout sumWindSpeedQuarterPanelLayout = new javax.swing.GroupLayout(sumWindSpeedQuarterPanel);
+        sumWindSpeedQuarterPanel.setLayout(sumWindSpeedQuarterPanelLayout);
+        sumWindSpeedQuarterPanelLayout.setHorizontalGroup(
+            sumWindSpeedQuarterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 350, Short.MAX_VALUE)
+        );
+        sumWindSpeedQuarterPanelLayout.setVerticalGroup(
+            sumWindSpeedQuarterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 260, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(sumWindSpeedQuarterPanel);
+        sumWindSpeedQuarterPanel.setBounds(1280, 740, 350, 260);
+
+        javax.swing.GroupLayout sumWindSpeedMonthPanelLayout = new javax.swing.GroupLayout(sumWindSpeedMonthPanel);
+        sumWindSpeedMonthPanel.setLayout(sumWindSpeedMonthPanelLayout);
+        sumWindSpeedMonthPanelLayout.setHorizontalGroup(
+            sumWindSpeedMonthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 340, Short.MAX_VALUE)
+        );
+        sumWindSpeedMonthPanelLayout.setVerticalGroup(
+            sumWindSpeedMonthPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 260, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(sumWindSpeedMonthPanel);
+        sumWindSpeedMonthPanel.setBounds(920, 190, 340, 260);
+
+        javax.swing.GroupLayout sumWindspeedWeekPanelLayout = new javax.swing.GroupLayout(sumWindspeedWeekPanel);
+        sumWindspeedWeekPanel.setLayout(sumWindspeedWeekPanelLayout);
+        sumWindspeedWeekPanelLayout.setHorizontalGroup(
+            sumWindspeedWeekPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 350, Short.MAX_VALUE)
+        );
+        sumWindspeedWeekPanelLayout.setVerticalGroup(
+            sumWindspeedWeekPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 270, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(sumWindspeedWeekPanel);
+        sumWindspeedWeekPanel.setBounds(910, 460, 350, 270);
+
+        javax.swing.GroupLayout histogramPanelLayout = new javax.swing.GroupLayout(histogramPanel);
+        histogramPanel.setLayout(histogramPanelLayout);
+        histogramPanelLayout.setHorizontalGroup(
+            histogramPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 360, Short.MAX_VALUE)
+        );
+        histogramPanelLayout.setVerticalGroup(
+            histogramPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 260, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(histogramPanel);
+        histogramPanel.setBounds(1270, 470, 360, 260);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/GUI Base.png"))); // NOI18N
         jLabel1.setText("jLabel1");
-        jScrollPane1.setViewportView(jLabel1);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(0, 0, 1690, 1080);
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 1718, 1050);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     /**
      * @param args the command line arguments
      */
-    final int chartWidth = 300;
-    final int chartHeight = 250;
+    final int chartWidth = 340;
+    final int chartHeight = 260;
     private ChartPanel polarChart;
     private ChartPanel sumWindspeedWeek;
     private ChartPanel sumWindspeedMonth;
@@ -98,13 +171,21 @@ public class MainGUI extends javax.swing.JFrame {
  
         setupCharts();
                 
-        chartViewer.removeAll();
-        chartViewer.add(polarChart);
-        chartViewer.add(avgWindspeed);
-        chartViewer.add(histogram);
-        chartViewer.add(sumWindspeedQuarter);
-        chartViewer.add(sumWindspeedMonth);
-        chartViewer.add(sumWindspeedWeek);
+        polarPanel.removeAll();
+        avgWindSpeedPanel.removeAll();
+        histogramPanel.removeAll();  
+        sumWindSpeedQuarterPanel.removeAll();
+        sumWindSpeedMonthPanel.removeAll();
+        sumWindspeedWeekPanel.removeAll();
+                
+                
+        polarPanel.add(polarChart);
+        avgWindSpeedPanel.add(avgWindspeed);
+        histogramPanel.add(histogram);
+        sumWindSpeedQuarterPanel.add(sumWindspeedQuarter);
+        sumWindSpeedMonthPanel.add(sumWindspeedMonth);
+        sumWindspeedWeekPanel.add(sumWindspeedWeek);
+        
     }
     
     /**
@@ -112,11 +193,11 @@ public class MainGUI extends javax.swing.JFrame {
      */
     private void setupCharts() {        
         sumWindspeedWeek.setBounds(0, 0, chartWidth, chartHeight);
-        polarChart.setBounds(chartWidth, 0, chartWidth, chartHeight);
-        sumWindspeedMonth.setBounds(0, chartHeight, chartWidth, chartHeight);
-        avgWindspeed.setBounds(chartWidth, chartHeight, chartWidth, chartHeight);
-        sumWindspeedQuarter.setBounds(0, chartHeight * 2, chartWidth, chartHeight);
-        histogram.setBounds(chartWidth, chartHeight * 2, chartWidth, chartHeight);
+        polarChart.setBounds(0, 0, chartWidth, chartHeight);
+        sumWindspeedMonth.setBounds(0, 0, chartWidth, chartHeight);
+        avgWindspeed.setBounds(0, 0, chartWidth, chartHeight);
+        sumWindspeedQuarter.setBounds(0, 0, chartWidth, chartHeight);
+        histogram.setBounds(0, 0, chartWidth, chartHeight);
         
         sumWindspeedWeek.setDomainZoomable(false);
         sumWindspeedWeek.setRangeZoomable(false);
@@ -165,7 +246,9 @@ public class MainGUI extends javax.swing.JFrame {
         /* Create and display the form */
         MainGUI v = new MainGUI();
         
-        v.setExtendedState(v.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        v.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        
         
         Data data = null;
         try {
@@ -188,13 +271,20 @@ public class MainGUI extends javax.swing.JFrame {
                 obj.getSumWindspeedQuarter(),
                 obj.getAvgWindspeedHourMonth(),
                 obj.getWindspeed()
-        );
+        
+                );
         
         v.setVisible(true);
     }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel chartViewer;
+    private javax.swing.JPanel avgWindSpeedPanel;
+    private javax.swing.JPanel histogramPanel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel polarPanel;
+    private javax.swing.JPanel sumWindSpeedMonthPanel;
+    private javax.swing.JPanel sumWindSpeedQuarterPanel;
+    private javax.swing.JPanel sumWindspeedWeekPanel;
     // End of variables declaration//GEN-END:variables
 }
