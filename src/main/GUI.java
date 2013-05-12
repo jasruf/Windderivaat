@@ -1,4 +1,4 @@
-package chart;
+package main;
 
 import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
@@ -19,12 +19,12 @@ import org.jfree.chart.JFreeChart;
  * GUI initialised at startup.
  * @author JASEEN, Loki
  */
-public class MainGUI extends javax.swing.JFrame {
+public class GUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form MainGUI
+     * Creates new form GUI
      */
-    public MainGUI() {
+    public GUI() {
         initComponents();
     }
 
@@ -136,7 +136,7 @@ public class MainGUI extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/GUI Base.png"))); // NOI18N
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 1718, 1050);
+        jLabel1.setBounds(0, 0, 1735, 1050);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -216,65 +216,6 @@ public class MainGUI extends javax.swing.JFrame {
         
         polarChart.setDomainZoomable(false);
         polarChart.setRangeZoomable(false);
-    }
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        
-        /* Create and display the form */
-        MainGUI v = new MainGUI();
-        
-        v.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
-        
-        
-        Data data = null;
-        try {
-            data = new Data("test_data_wind.txt");
-            data.fill();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Formulas.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Formulas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        ChartDataset obj = new ChartDataset(data);
-        obj.setInterval(1991, 1992);
-        
-        v.initGraphs(
-                obj.getPolarData(),
-                obj.getSumWindspeedWeek(),
-                obj.getSumWindspeedMonth(),
-                obj.getSumWindspeedQuarter(),
-                obj.getAvgWindspeedHourMonth(),
-                obj.getWindspeed()
-        
-                );
-        
-        v.setVisible(true);
     }
     
     
