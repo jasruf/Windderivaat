@@ -13,20 +13,21 @@ import javax.swing.JPanel;
  * @author loki
  */
 public class Scale {
-    public static void setBounds(Component panel, int percentX, int percentY, int percentWidth, int percentHeight) {
+    public static void setBounds(Component panel, double percentX, double percentY, double percentWidth, double percentHeight) {
         Scale scalePos = new Scale(percentX, percentY);
         Scale scaleSize = new Scale(percentWidth, percentHeight);
         
-        int width = Toolkit.getDefaultToolkit().getScreenSize().width;
-        int height = Toolkit.getDefaultToolkit().getScreenSize().height;
-        panel.setBounds(scalePos.absX(width), scalePos.absY(height), scaleSize.absX(width), scaleSize.absY(height));
+        double width = Toolkit.getDefaultToolkit().getScreenSize().width;
+        double height = Toolkit.getDefaultToolkit().getScreenSize().height;
+
+        panel.setBounds((int)scalePos.absX(width), (int)scalePos.absY(height),(int)scaleSize.absX(width), (int)scaleSize.absY(height));
     }
     
     
     private double PercentageX, PercentageY;
     
     
-    Scale(int scaleX, int scaleY) {
+    Scale(double scaleX, double scaleY) {
         setPercentageX(scaleX);
         setPercentageY(scaleY);
     }
@@ -35,8 +36,8 @@ public class Scale {
      * @param absSize
      * @return Percentage * absSize
      */
-    public int absX(int absSize) {
-        return (int)(PercentageX*absSize)/100;
+    public double absX(double absSize) {
+        return (PercentageX*absSize)/100;
     }
     
     /**
@@ -44,14 +45,14 @@ public class Scale {
      * @param absSize
      * @return Percentage * absSize
      */
-    public int absY(int absSize) {
-        return (int)(PercentageY*absSize)/100;
+    public double absY(double absSize) {
+        return (PercentageY*absSize)/100;
     }
 
     /**
      * @param scaleX the scaleX to set
      */
-    public void setPercentageX(int scaleX) {
+    public void setPercentageX(double scaleX) {
         if(scaleX < 0) {
             throw new IllegalArgumentException("percentage can't be lower than 0");
         }
@@ -65,7 +66,7 @@ public class Scale {
     /**
      * @param scaleY the scaleY to set
      */
-    public void setPercentageY(int scaleY) {
+    public void setPercentageY(double scaleY) {
         if(scaleY < 0) {
             throw new IllegalArgumentException("percentage can't be lower than 0");
         }

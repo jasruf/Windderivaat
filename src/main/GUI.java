@@ -1,16 +1,8 @@
 package main;
 
-import java.awt.BorderLayout;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import math.ChartDataset;
-import math.Formulas;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 
@@ -29,7 +21,7 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() {
         initComponents();
-        Scale.setBounds(background, 0, 0, 100, 100);
+        Scale.setBounds(background, 0, 0, 100, 90);
         
         int originWidth = background.getIcon().getIconWidth();
         int originHeight = background.getIcon().getIconHeight();
@@ -99,11 +91,15 @@ public class GUI extends javax.swing.JFrame {
                 
         //this.removeAll();
                 
-                
+        background.add(sumWindspeedWeek);        
         background.add(polarChart);
-        // posX posY width height
-        Scale.setBounds(polarChart, 10, 15, 10, 10);
+        background.add(sumWindspeedMonth);
         
+        // posX posY width height
+        
+        Scale.setBounds(sumWindspeedWeek, 55, 17, 20, 21);
+        Scale.setBounds(polarChart, 76.5, 17, 20, 21);
+        Scale.setBounds(sumWindspeedMonth, 55, 40.5, 20, 21);
         //this.add(avgWindspeed);
         //this.add(histogram);
         //this.add(sumWindspeedQuarter);
